@@ -13,6 +13,7 @@ import { approveContract, lotteryLoadData, lotteryDataLoadSuccess, lotteryDataLo
   loadCurrentContractAllowance, loadCurrentContractAllowanceSuccess, 
   loadCurrentContractAllowanceFailure, setHasWinnings, checkForWinningsFailure, checkForWinnings, loadUserBalance, loadUserBalanceSuccess, loadUserBalanceFailure } from '../reducers/lottery.reducer';
 import { loadUserTickets, loadUserTicketsFailure, loadUserTicketsSuccess } from '../reducers/user-ticket.reducer';
+import { logoutUser } from '../reducers/user.reducer';
 import { getAccountAddress } from '../selectors/users.selectors';
 import Web3 from 'web3';
 import { CommonUtil } from 'app/common.util';
