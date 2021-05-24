@@ -103,8 +103,7 @@ The Draw is setup so that once its ongoing no one, not even the admin can influe
 This is done by having a separate variable for the admin to set, which will be used to refresh the actual variable when a draw is run.
 The admin can change the active winning percentages right now(but this too can be changed if needed)
 
-Automatic converstions was looked at using the Uinswap router, however was not implemented due to lack of time. With this, with *enough* users buying tickets.
-The system could be truly self sustaining by taking a fee for LINK conversions.
+The project has been setup with most of the keys and secrets committed. These are throwaway items that were committed to make it easy for reviewers.
 
 # Known Issues
 
