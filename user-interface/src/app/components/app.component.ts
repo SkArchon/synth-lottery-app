@@ -47,12 +47,12 @@ export class AppComponent {
         return confirmResult;
       }),
       filter(result => result),
-      withLatestFrom(this.accountAddress$),
+      withLatestFrom(this.store.select(getAccountAddress)),
       switchMap(([_, accountAddress]) => {
         return this.contractService.getLotteryContract()
           .methods
           .startDraw(1234)
-          .send({ from: '0xb4214cd6B2CF82Eed431e0e679aB242c797dd91D' });
+          .send({ from: accountAddress });
       })
     ).subscribe(result => {
       console.log(result);

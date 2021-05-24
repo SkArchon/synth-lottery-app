@@ -123,20 +123,28 @@ npm run install-all
 
 Open up the file `2_migrate.js` and update the `sUsdAddress` if required. (or any similar ERC20 token).
 
-Then run
-
+Then run (skip to next for windows / environments that cant run bash scripts)
+ 
 ```
 npm run deploy-contract-kovan
 ```
 
-Copy the outputted contract address (should look like below)
+** windows only ** If you on Windows you may not be able to run the above, try doing the following.
+*Also take a look at deploy_kovan.sh*
+1. Go into the folder of "contracts"
+2. Clean the build folder (`contracts/build`)
+3. Run `truffle migrate --compile-all --network kovan`
+4. Remove everything in `user-interface/src/contracts/*`
+5. Copy everything in `build/contracts/*` to `user-interface/src/contracts/`
+
+Copy the outputted contract address (should look like below) (For windows users this will be after the `truffle migrate` command)
 ```
 ================================================
 PASTE Lottery Contract Address In app.constants.ts (2 files): 0xF199FFb9Cbc5a35647d0641e51fcA45090ca52f0
 ================================================
 ```
 
-Then a link kovan faucent page will open up, make sure to fund the contract with link (for the draw).
+Then a link kovan faucet page will open up, make sure to fund the contract with link (for the draw).
 
 Next search for `<<REPLACE_ADDRESS>>`. Here repalce the contract address. (Alternatively if you used a different sUSD contract address, make sure to replace it in the `user-interface` `USD_ADDRESS` variable value).
 
