@@ -190,7 +190,7 @@ export class AppEffects {
 
   Logout$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(loadLotteryDraws),
+      ofType(logoutUser),
       tap(_ => {
         this.contractService.clearProvider();
       })
