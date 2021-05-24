@@ -65,8 +65,10 @@
                                                     <div class="Ticket-Purchase__input__label">Tickets</div>
                                                 </div>
                                                 <div class="Ticket-Purchase__selected-price">
-                                                    <span class="Ticket-Purchase__selected-price__for">for</span>
-                                                    <span class="Ticket-Purchase__selected-price__amount">sUSD {{ caluclatedPrice$ | async }}</span>
+                                                    <div class="child-wrapper-price">
+                                                        <span class="Ticket-Purchase__selected-price__for">for</span>
+                                                        <span class="Ticket-Purchase__selected-price__amount">sUSD {{ caluclatedPrice$ | async }}</span>
+                                                    </div>
                                                 </div>
                                                 <div>
                                                     <button class="Button Button--buy-button" type="submit">

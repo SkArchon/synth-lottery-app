@@ -4,9 +4,15 @@
             <div class="row" *ngFor="let draw of (draws$ | async)">
               <div class="col">
                 <div class="Draw-Entry">
-                  <div>Draw Number {{ draw.drawNumber }}</div>
-                  <div>Draw Date {{ draw.date }}</div>
-                  <div>Draw Pool {{ draw.totalDrawPool }}</div>
+                    <div>
+                        <div class="header-text">Draw Number</div><div> {{ draw.drawNumber }}</div>
+                    </div>
+                    <div>
+                        <div class="header-text">Draw Date</div><div> {{ formatDate(draw.date) }}</div>
+                    </div>
+                    <div>
+                        <div class="header-text">Draw Pool</div><div class="draw-amount"> sUSD {{ formatAmount(draw.totalDrawPool) }}</div>
+                    </div>
                 </div>
               </div>
             </div>

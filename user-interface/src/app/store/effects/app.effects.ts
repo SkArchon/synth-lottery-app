@@ -62,7 +62,6 @@ export class AppEffects {
           drawNumber: Number(result.currentDrawNumber),
           ticketPrice: Number(CommonUtil.getNumber(result.ticketPrice))
         };
-        console.log(data);
         return lotteryDataLoadSuccess(data);
       }),
       catchError((error) => {

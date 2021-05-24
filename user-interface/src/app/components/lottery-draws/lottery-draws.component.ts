@@ -2,9 +2,11 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { CommonUtil } from 'app/common.util';
 import { loadLotteryDraws } from 'app/store/reducers/lottery-draws.reducer';
 import * as lotteryDrawSelectors from 'app/store/selectors/lottery-draws.selectors';
 import { Subject } from 'rxjs';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-lottery-draws',
@@ -29,6 +31,14 @@ export class LotteryDrawsComponent implements OnDestroy {
 
     this.loadingState$ = this.store.select(lotteryDrawSelectors.getLoadingState);
     this.draws$ = this.store.select(lotteryDrawSelectors.getDraws);
+  }
+
+  public formatDate(timestamp): string {
+    return DateTime.fromSeconds(timestamp).toFormat('yyyy LLL dd');
+  }
+
+  public formatAmount(value): string {
+    return CommonUtil.formatAmount(value);
   }
 
   ngOnDestroy(): void {
