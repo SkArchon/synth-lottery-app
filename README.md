@@ -1,4 +1,4 @@
-# Synthetic Lottery
+# Synthetix Lottery
 ![screenshot](https://user-images.githubusercontent.com/83293842/119379307-f5f17080-bcdc-11eb-84b1-3bf0ebe80eb4.png)
 
 # Overview
