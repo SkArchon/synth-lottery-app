@@ -128,6 +128,8 @@ Fix the draw overlap bug mentioned above.
 
 There is a mix of BEM css and non BEM css along with css classes duplicated and spread between files, these need to be refactored.
 
+Allow user to continue using the app without waiting for transaction confirmations, by changing the overall design.
+
 # Project Setup
 
 ### Method using helper scripts
@@ -154,6 +156,7 @@ npm run deploy-contract-kovan
 5. Copy everything in `build/contracts/*` to `user-interface/src/contracts/`
 
 Copy the outputted contract address (should look like below) (For windows users this will be after the `truffle migrate` command)
+
 ```
 ================================================
 PASTE Lottery Contract Address In app.constants.ts (2 files): 0xF199FFb9Cbc5a35647d0641e51fcA45090ca52f0
