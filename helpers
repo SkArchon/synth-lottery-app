@@ -1,0 +1,11 @@
+helpers
+
+var instance = await Lottery.deployed();
+var runDraw = await instance.processDraw(47);
+
+await instance.mint("0xb4214cd6B2CF82Eed431e0e679aB242c797dd91D", web3.utils.toWei("10"));
+
+0x9CFb2f09b59C1A82Ab7B9a352C548796aE2d50Fd
+
+docker run mythril/myth -xa 0x9CFb2f09b59C1A82Ab7B9a352C548796aE2d50Fd --rpc host.docker.internal:7545
+docker run mythril/myth a -a 0x9CFb2f09b59C1A82Ab7B9a352C548796aE2d50Fd --rpc host.docker.internal:7545

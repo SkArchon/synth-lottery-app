@@ -1,0 +1,27 @@
+<div>
+    <div *ngIf="(loadingState$ | async) === 'success'" [@enterAnimation]>
+        <div class="container">
+            <div class="row" *ngFor="let draw of (draws$ | async)">
+              <div class="col">
+                <div class="Draw-Entry">
+                  <div>Draw Number {{ draw.drawNumber }}</div>
+                  <div>Draw Date {{ draw.date }}</div>
+                  <div>Draw Pool {{ draw.totalDrawPool }}</div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="(loadingState$ | async) === 'pending'">
+        <div class="synth-spinner">
+            <div class="spinner-border text-dark" role="status" style="width: 3rem; height: 3rem; z-index: 20;">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+    <ng-container *ngIf="(loadingState$ | async) === 'error'">
+        <div class="synth-spinner error-loading">
+            We were unable to load past draws
+        </div>
+    </ng-container>
+</div>

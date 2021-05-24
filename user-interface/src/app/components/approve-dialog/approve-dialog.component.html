@@ -1,0 +1,66 @@
+<div *ngIf="submitLoader$ | async; let submitStatus">
+    <div class="approve-header">
+        Approve Lottery Contract
+    </div>
+    <div *ngIf="submitStatus === 'idle' || submitStatus === 'error'">
+        <form (ngSubmit)="approve()" [formGroup]="approveForm">
+            <div *ngIf="submitStatus === 'idle'">
+                <p>
+                    Before you purchase a ticket, our app needs to be given approval to access your funds for ticket purchases.
+                </p>
+                <p>
+                    You have requested to purchase two tickets at sUSD {{approvalMinPrice}}.
+                </p>
+                <p>
+                    Since an approval costs gas you have the option to increase the approval amount.
+                    This is useful to save gas costs when you decide to buy more tickets later.
+                </p>
+            </div>
+            <div *ngIf="submitStatus === 'error'">
+                <p>There was an unexpected error when trying to approve our app to use our funds, please refresh and try again.</p>
+            </div>
+            <div class="form-entry">
+                <div>
+                    <label for="approve-amount">Approve Amount</label>
+                </div>
+                <div>
+                    <input type="text" formControlName="approveAmount" id="approve-amount">
+                </div>
+                <div *ngIf="(approveForm.controls.approveAmount.touched)" class="error-reason">
+                    <ng-container *ngIf="approveForm.controls.approveAmount.errors?.required">
+                        Please enter an approve amount
+                    </ng-container>
+                    <ng-container
+                        *ngIf="!approveForm.controls.approveAmount.errors?.required && approveForm.controls.approveAmount.errors?.minPriceNotMet">
+                        Please enter at least {{ approvalMinPrice }}
+                    </ng-container>
+                </div>
+                <button type="submit" class="Button Button--primary button-approve">Approve</button>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="submitStatus === 'pending'">
+        <div class="loader-wrapper">
+            <div>
+                <p>Approving the lottery contract</p>
+            </div>
+            <div class="synth-spinner">
+                <div class="spinner-border text-dark" role="status" style="width: 3rem; height: 3rem; z-index: 20;">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="submitStatus === 'success'">
+        <div class="pending-message">
+            <span>Successfully Approved sUSD {{ approveForm.controls.approveAmount.value }}</span>
+        </div>
+        <div class="synth-spinner">
+            <div class="synth-spinner">
+                <div class="spinner-border text-dark" role="status" style="width: 3rem; height: 3rem; z-index: 20;">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

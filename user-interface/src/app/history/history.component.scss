@@ -1,0 +1,41 @@
+$price-summary-background: #209efb;
+$price-summary-color: #ffffff;
+
+.margin-top {
+    margin-top: 20px;
+}
+.Lottery-Result {
+    //border: 1px gray solid;
+    box-shadow: 0px 3px 43px 0px rgb(12 0 255 / 10%);
+    border-radius: 5px;
+    // padding: 10px;
+
+    &__lottery-summary {
+        padding: 10px;
+    }
+
+    &__summary {
+        width: 320px;
+        padding: 10px;
+        background: $price-summary-background; 
+        text-align: right;
+        color: $price-summary-color;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+
+        &__jackpot {
+            margin-top: 10px;
+            &__header {
+                font-size: 16px;
+                margin-bottom: -8px;
+                font-weight: 500;
+                letter-spacing: 1px;
+            }
+            &__amount {
+                font-weight: 600;
+                color: #fff1df;
+                font-size: 26px;
+            }
+        }
+    }
+}
