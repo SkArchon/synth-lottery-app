@@ -7,4 +7,7 @@ module.exports = async function(deployer) {
   
   const sUsdAddress = "0x57Ab1ec28D129707052df4dF418D58a2D46d5f51";
   const lotteryDeployment = await deployer.deploy(Lottery, keyHash, vrfCoordinator, linkTokenAddress, sUsdAddress);
+  console.log("================================================");
+  console.log("PASTE Lottery Contract Address In app.constants.ts (2 files): " + Lottery.address);
+  console.log("================================================")
 };

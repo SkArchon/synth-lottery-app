@@ -1,0 +1,23 @@
+{
+  "name": "synth-lottery-app",
+  "version": "1.0.0",
+  "description": "Synth Root",
+  "scripts": {
+    "install-contracts": "cd contracts && npm install",
+    "install-service": "cd backend-listener-service && npm install",
+    "install-client": "cd user-interface && npm install",
+    "install-current": "npm install",
+    "install-all": "npm run install-contracts && npm run install-service && npm run install-client && npm run install-current",
+    "process-kovan": "cd contracts && ./deploy_kovan.sh",
+    "open-link": "node ./open-link.js",
+    "deploy-contract-kovan": "npm run process-kovan && npm run open-link",
+    "service": "cd backend-listener-service && npm run start",
+    "client": "cd user-interface && npm run start",
+    "start-services": "concurrently \"npm run client\" \"npm run service\""
+  },
+  "author": "",
+  "dependencies": {
+    "concurrently": "^6.1.0",
+    "open": "^8.1.0"
+  }
+}

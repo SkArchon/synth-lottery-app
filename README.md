@@ -135,7 +135,17 @@ cd contracts
 #The above script will copy over the processed contracts into the user-interface folder.
 # Currently the script doesnt copy the lottery.json over to the backend-listner-service. If you need to change the abi, copy it over to Lottery.ts 
 ```
+3. search for `app.constants.ts` (2 files) and replace the lottery contract. You would have gotten a output from the deploy script as follows
 
-3. search for `app.constants.ts` (2 files) and replace the lottery contract. (note it is recommended to change the mongodb url as well)
+```
+================================================
+PASTE Lottery Contract Address In app.constants.ts (2 files): 0xF199FFb9Cbc5a35647d0641e51fcA45090ca52f0
+================================================
+
+  OR USE
+
+Deploying 'Lottery'
+```
+
 4. Run `npm run start` in backend and user-interface folders separately.
 5. Go to http://localhost:4200
