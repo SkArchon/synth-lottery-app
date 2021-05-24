@@ -108,21 +108,16 @@ The system could be truly self sustaining by taking a fee for LINK conversions.
 
 # Known Issues
 
-The main issue that is prelevant in the application is that sometimes a transaction based action like claim, tranfer, buy, etc will fail unexpectedly. This is solved after a refresh. This is usually happens when data is asyncrhonously refreshed. If you get an unexpected error, please do a refresh before performing that action. In order to make this app production ready, this is an issue that needs to be fixed. I do apologize to not being able to fix it for this submission due to time constraints.
+There was an issue where after certain async tasks ran (like loading winner details after a draw has run without refreshing the page) where if you try to submit a transaction an error would happen. This was because the provider was getting reset to the Infura provider. However this has been fixed, while unlikely due to lack of time to test, it maybe could occur through other patterns. In this case please try refreshing the page and doing the action again.
 
-```
-Error: Returned error: The method eth_sendTransaction does not exist/is not available
-    at Object.ErrorResponse (errors.js:30)
-    at onJsonrpcResult (index.js:172)
-    at XMLHttpRequest.request.onreadystatechange [as __zone_symbol__ON_PROPERTYreadystatechange] (index.js:111)
-    at XMLHttpRequest.wrapFn (zone-evergreen.js:1218)
-```
-Is the error, leading me to believe that this is due to the wrong provider being used (Infura) instead of the Metamask for the transaction.
+On the lottery draw page, the display limit is currently capped to 10. However the backend has been written in a fashion capable of pagination. The plan was to allow infinite scrolling to demonstrate how centralized apps could help with UX, but due to lack of time this was not possible.
 
 # Further Improvements
 
 One major improvement point is to make the contract self sustainable, this can be done by using Uniswaps Router (https://uniswap.org/docs/v2/smart-contracts/router02/) or some similar contract. To exchange sUSD for Link. This way the contract can be self sustained.
 Additionally a similar mechanism could be used so that ether may be sent to the address that is used by the backend scheduler so it does not run out of funds for the transaction fee each time it calls the function that initiates the draw.
+
+Mobile viewports breaks the UI a bit (especially on the home page), currently approximately tab displays and larger would display correctly.
 
 # Project Setup
 
@@ -158,7 +153,7 @@ PASTE Lottery Contract Address In app.constants.ts (2 files): 0xF199FFb9Cbc5a356
 
 Then a link kovan faucet page will open up, make sure to fund the contract with link (for the draw).
 
-Next search for `<<REPLACE_ADDRESS>>`. Here repalce the contract address. (Alternatively if you used a different sUSD contract address, make sure to replace it in the `user-interface` `USD_ADDRESS` variable value).
+Next search for `<<REPLACE_ADDRESS>>`. Here repalce the contract address. (Alternatively if you used a different sUSD contract address, make sure to replace it in the `user-interface` `USD_ADDRESS` variable value). The files that you need to change are in app.constants.ts (2 files of the same name).
 
 And finally run
 
