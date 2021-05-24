@@ -20,7 +20,7 @@ contract LotteryTicket is Ownable, ERC721Enumerable {
   // 18 Decimals
   string private constant nftSymbol = "SNLOT";
   string private constant nftName = "Snx Lottery Ticket";
-  uint16 private constant maxTicketsPerPurchase = 1000;
+  uint16 private constant maxTicketsPerPurchase = 100;
 
   // We do not want to change the price of the ticket price in the draw
   // after it has already started as this would give a positive or negative advantage

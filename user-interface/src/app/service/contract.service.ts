@@ -38,9 +38,7 @@ export class ContractService {
     this.store.select(getAccountAddress)
       .pipe(
         take(1),
-        filter(address => {
-          return address && this.web3Modal.cachedProvider;
-        })
+        filter(address => !!address)
       )
       .subscribe(_ => {
         this.connectWallet();
@@ -48,14 +46,8 @@ export class ContractService {
   }
 
   private setupWeb3Modal(): void {
-    const providerOptions = {
-      walletconnect: {
-        package: WalletConnectProvider, // required
-        options: {
-          infuraId: '94678990504444e9a99275e787dcddb8' // required
-        }
-      }
-    };
+    // You can add other wallet providers here (which will result in a popup)
+    const providerOptions = {};
 
     this.web3Modal = new Web3Modal({
       network: 'mainnet', // optional

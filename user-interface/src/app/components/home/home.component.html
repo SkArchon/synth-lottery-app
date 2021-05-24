@@ -80,6 +80,9 @@
                                             <div class="row" *ngIf="buyForm.invalid">
                                                 <div class="col">
                                                     <div class="error-reason">
+                                                        <ng-container *ngIf="buyForm.controls.ticketCount.errors?.max">
+                                                            You can only buy {{ maxTicketsPerPurchase }} tickets at once
+                                                        </ng-container>
                                                         <ng-container *ngIf="buyForm.controls.ticketCount.errors?.required">
                                                             Please enter a ticket count
                                                         </ng-container>

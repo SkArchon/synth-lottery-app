@@ -38,6 +38,10 @@ export class HomeComponent implements OnDestroy {
   public purchaseSubmit$ = new Subject<void>();
   public isDrawDatePassed$ = new Subject<boolean>();
 
+  // This should be the same as in the contract
+  // since both are constants we dont retrieve them from the contract
+  public readonly maxTicketsPerPurchase = 100;
+
   public dateString$;
   public loadingState$;
   public drawNumber$;
@@ -107,7 +111,8 @@ export class HomeComponent implements OnDestroy {
     this.getIsDrawDateValuePassedUpdater().subscribe(this.isDrawDatePassed$);
 
     this.buyForm = formBuilder.group({
-      ticketCount: new FormControl(1, [Validators.required, this.numberValidator()], [this.balanceExceeded()]),
+      ticketCount: new FormControl(1,
+        [Validators.required, Validators.max(this.maxTicketsPerPurchase), this.numberValidator()], [this.balanceExceeded()]),
     });
 
     this.caluclatedPrice$ = this.buyForm.controls.ticketCount.valueChanges.pipe(

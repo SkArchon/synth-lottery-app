@@ -49,5 +49,6 @@ export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionRedu
   return localStorageSync({keys: ['user'], rehydrate: true })(reducer);
 }
 
+// const commonReducers = [];
 const commonReducers = [localStorageSyncReducer];
 export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [...commonReducers] : [...commonReducers];
