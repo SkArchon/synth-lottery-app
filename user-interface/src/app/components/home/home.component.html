@@ -90,7 +90,11 @@
                                                             Please enter a valid number
                                                         </ng-container>
                                                         <ng-container
-                                                            *ngIf="!buyForm.controls.ticketCount.errors?.required && buyForm.controls.ticketCount.errors?.balanceExceeded">
+                                                                *ngIf="!buyForm.controls.ticketCount.errors?.notNumber && buyForm.controls.ticketCount.errors?.notWholeNumber">
+                                                            Please enter a whole number
+                                                        </ng-container>
+                                                        <ng-container
+                                                                *ngIf="!buyForm.controls.ticketCount.errors?.required && buyForm.controls.ticketCount.errors?.balanceExceeded">
                                                             Your Balance of sUSD {{ formatAmount(userBalanceValue) }} has exceeded
                                                         </ng-container>
                                                     </div>

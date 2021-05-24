@@ -111,8 +111,13 @@ export class HomeComponent implements OnDestroy {
     this.getIsDrawDateValuePassedUpdater().subscribe(this.isDrawDatePassed$);
 
     this.buyForm = formBuilder.group({
-      ticketCount: new FormControl(1,
-        [Validators.required, Validators.max(this.maxTicketsPerPurchase), this.numberValidator()], [this.balanceExceeded()]),
+      ticketCount: new FormControl(1, [
+        Validators.required,
+        Validators.max(this.maxTicketsPerPurchase),
+        this.numberValidator(),
+        this.wholeNumberValidator()
+      ],
+      [this.balanceExceeded()]),
     });
 
     this.caluclatedPrice$ = this.buyForm.controls.ticketCount.valueChanges.pipe(
@@ -120,9 +125,12 @@ export class HomeComponent implements OnDestroy {
       withLatestFrom(this.ticketPrice$),
       map(([ticketCount, ticketPrice]) => {
         const ticketCountNumber = Number(ticketCount);
-        return ((isNaN(ticketCountNumber) || ticketCountNumber < 0) )
-          ? 0.00
-          : CommonUtil.formatAmount(ticketCountNumber * ticketPrice);
+        if ((isNaN(ticketCountNumber) || ticketCountNumber < 0) ) {
+          return CommonUtil.formatAmount(0.00);
+        }
+        return (ticketCount.toString().indexOf('.') > -1)
+          ? CommonUtil.formatAmount(0.00)
+          : CommonUtil.formatAmount((ticketCountNumber * ticketPrice));
       })
     );
 
@@ -202,7 +210,7 @@ export class HomeComponent implements OnDestroy {
           return of(true);
         }
 
-        const approvalMinPrice = priceTotal - lotteryAllowance;
+        const approvalMinPrice = priceTotal;
         const dialogRef = this.dialog.open(ApproveDialogComponent, {
           data: { approvalMinPrice }
         });
@@ -317,6 +325,16 @@ export class HomeComponent implements OnDestroy {
     return (control: AbstractControl): ValidationErrors | null => {
       const numberValue = Number(control.value);
       return (isNaN(numberValue) || numberValue < 0) ? {notNumber: true} : null;
+    };
+  }
+
+  wholeNumberValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const numberValue = Number(control.value);
+      if (!(isNaN(numberValue) || numberValue < 0)) {
+        return (control.value.toString().indexOf('.') > -1) ? { notWholeNumber: true } : null;
+      }
+      return null;
     };
   }
 
