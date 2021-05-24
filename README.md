@@ -15,10 +15,9 @@ The application uses a monorepo architecture where
 * user-interface
   A frontend application written in Angular.
 
-Click the following (https://youtu.be/weMjJnXqsdU) to view the recording.
-[![Demonstration](https://img.youtube.com/vi/weMjJnXqsdU/0.jpg)](https://youtu.be/weMjJnXqsdU)
+Click the following (https://youtu.be/5K5kpaddMsw) to view the recording.
+[![Demonstration](https://img.youtube.com/vi/5K5kpaddMsw/0.jpg)](https://youtu.be/5K5kpaddMsw)
 
-(Do ignore the "Past draws" UI issue in the above video, will put a fix soon)
 
 # Functionality 
 
