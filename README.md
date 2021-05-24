@@ -102,6 +102,16 @@ For example the loading of the user tickets is done directly in the contract, ho
 So in summary in my opinion, centralization isnt bad as long as it is not the source of truth. I believe lots of other dapps (cryptokitties, etherscan, etc) does this.
 
 
+## Misc Notes
+
+The Draw is setup so that once its ongoing no one, not even the admin can influence any of the main components (Draw end time and ticket price).
+This is done by having a separate variable for the admin to set, which will be used to refresh the actual variable when a draw is run.
+The admin can change the active winning percentages right now(but this too can be changed if needed)
+
+Automatic converstions was looked at using the Uinswap router, however was not implemented due to lack of time. With this, with *enough* users buying tickets.
+The system could be truly self sustaining by taking a fee for LINK conversions.
+
+
 How to start projects
 1. Run `npm install` inside all three folders individually.
 

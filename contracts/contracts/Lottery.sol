@@ -120,8 +120,6 @@ contract Lottery is LotteryTicket, VRFConsumerBase {
    * Callback function used by VRF Coordinator
    */
   function processDraw(uint256 randomness) private onlyRandomGenerator {
-    emit LotteryDraw(drawNumberTracker.current(), randomness, currentDrawTimestamp);
-
     // Get the correct contractPoolTotal by subtracting
     // the locked amount
     uint256 accountBalance = sUsdToken.balanceOf(address(this));

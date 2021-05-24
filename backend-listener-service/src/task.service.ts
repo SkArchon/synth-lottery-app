@@ -22,7 +22,8 @@ export class TaskService {
     this.lotteryContract = new this.web3.eth.Contract(LOTTERY_CONTRACT.abi, CONTRACT_ADDRESS);
   }
 
-  @Cron(CronExpression.EVERY_30_SECONDS)
+  // This is 30 seconds for testing, ideally should be 5 minutes
+  @Cron(CronExpression.EVERY_30_SECONDS) 
   private async processDraw() {
     try {
       console.log(this.web3.eth.accounts[0]);
