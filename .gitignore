@@ -1,4 +1,4 @@
 node_modules
 .idea
 contracts/build/contracts/*
-user-interface/src/contracts/*
+user-interface/src/contracts/*.json
