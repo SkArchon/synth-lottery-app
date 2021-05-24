@@ -1,5 +1,5 @@
 # Synthetic Lottery
-![screenshot](https://user-images.githubusercontent.com/83293842/119280678-0c9db600-bc50-11eb-848e-0cd5649f41b7.jpeg)
+![screenshot](https://user-images.githubusercontent.com/83293842/119379307-f5f17080-bcdc-11eb-84b1-3bf0ebe80eb4.png)
 
 # Overview
 
@@ -28,10 +28,6 @@ Before a user logs into the application with his wallet, we use a separate infur
 
 This is as we use the web3modal library, currently we have added two for Demo purposes. But we only really tested with metamask.
 
-```
-** Known Inssues **
-Currently there are issues with Web3Modal integration, especially when switching accounts. As a result when a user switches accounts we go ahead and logout the user & clear localstorage and refresh the page for good measure. If you see any issues Try hard refreshing the page. Due to lack of time I was not able to fix this before the deadline.
-```
 
 After the user logs in, we use the account Id to get additional information. Namely the balance and the contract approval amount. All of this data is stored in a redux style store (ngrx in angular). Which allows for high synchronity.
 
@@ -111,6 +107,23 @@ The admin can change the active winning percentages right now(but this too can b
 Automatic converstions was looked at using the Uinswap router, however was not implemented due to lack of time. With this, with *enough* users buying tickets.
 The system could be truly self sustaining by taking a fee for LINK conversions.
 
+# Known Issues
+
+The main issue that is prelevant in the application is that sometimes a transaction based action like claim, tranfer, buy, etc will fail unexpectedly. This is solved after a refresh. This is usually happens when data is asyncrhonously refreshed. If you get an unexpected error, please do a refresh before performing that action. In order to make this app production ready, this is an issue that needs to be fixed. I do apologize to not being able to fix it for this submission due to time constraints.
+
+```
+Error: Returned error: The method eth_sendTransaction does not exist/is not available
+    at Object.ErrorResponse (errors.js:30)
+    at onJsonrpcResult (index.js:172)
+    at XMLHttpRequest.request.onreadystatechange [as __zone_symbol__ON_PROPERTYreadystatechange] (index.js:111)
+    at XMLHttpRequest.wrapFn (zone-evergreen.js:1218)
+```
+Is the error, leading me to believe that this is due to the wrong provider being used (Infura) instead of the Metamask for the transaction.
+
+# Further Improvements
+
+One major improvement point is to make the contract self sustainable, this can be done by using Uniswaps Router (https://uniswap.org/docs/v2/smart-contracts/router02/) or some similar contract. To exchange sUSD for Link. This way the contract can be self sustained.
+Additionally a similar mechanism could be used so that ether may be sent to the address that is used by the backend scheduler so it does not run out of funds for the transaction fee each time it calls the function that initiates the draw.
 
 # Project Setup
 
@@ -162,4 +175,5 @@ Go to http://localhost:4200, if everything was deployed correctly, you should ge
 
 The backend service should output `Returning result ` if connection to the contract was successful (task.service.ts, line 70).
 
-
+# Final Thoughts
+Working on this was stressful but fun as it was my first Dapp and foray into the Web3 ecosystem. Any feedback on improvements is most welcome.
