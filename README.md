@@ -101,7 +101,9 @@ So in summary in my opinion, centralization isnt bad as long as it is not the so
 
 The Draw is setup so that once its ongoing no one, not even the admin can influence any of the main components (Draw end time and ticket price).
 This is done by having a separate variable for the admin to set, which will be used to refresh the actual variable when a draw is run.
-The admin can change the active winning percentages right now(but this too can be changed if needed)
+The admin can change the active winning percentages right now(but this too can be changed if needed).
+
+The current time duration for a draw is set to 8 mins, with the initial draw set to 5 minutes. This is so that it is easy to test. We can easily set this to 6 hours or 1 week by modifying Line 30 and/or line 57 in `Lottery.sol`.
 
 The project has been setup with most of the keys and secrets committed. These are throwaway items that were committed to make it easy for reviewers.
 
@@ -114,12 +116,17 @@ Likewise, there could be missing permutations where a certain dataset that neede
 On the lottery draw page, the display limit is currently capped to 10. However the backend has been written in a fashion capable of pagination. The plan was to allow infinite scrolling to demonstrate how centralized apps could help with UX, but due to lack of time this was not possible.
 
 Draws can overlap, where multiple draws have elapsed. What I mean is, lets say a draw last 5 minutes, however draw #1 which was supposed to be processed at 5 PM was not processed yet. When the seheduler is started back up at 6 PM the next draw time will be 5:05 PM which is still in the past. This is less unlikely when the draw is processed once per week, but still possible. Logic needs to be added to set the time to the most recent draw in the future.
+
 # Further Improvements
 
 One major improvement point is to make the contract self sustainable, this can be done by using Uniswaps Router (https://uniswap.org/docs/v2/smart-contracts/router02/) or some similar contract. To exchange sUSD for Link. This way the contract can be self sustained.
 Additionally a similar mechanism could be used so that ether may be sent to the address that is used by the backend scheduler so it does not run out of funds for the transaction fee each time it calls the function that initiates the draw.
 
 Mobile viewports breaks the UI a bit (especially on the home page), currently approximately tab displays and larger would display correctly.
+
+Fix the draw overlap bug mentioned above.
+
+There is a mix of BEM css and non BEM css along with css classes duplicated and spread between files, these need to be refactored.
 
 # Project Setup
 
