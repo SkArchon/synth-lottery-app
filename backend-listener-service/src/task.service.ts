@@ -29,14 +29,19 @@ export class TaskService {
       console.log(this.web3.eth.accounts[0]);
       this.logger.log("Starting draw run check");
       const runDraw = await this.isDurationPassed();
+      
       if(runDraw) {
         this.logger.log("Running draw");
         const seed = this.getSeed();
 
+        const nonce = await this.web3.eth.getTransactionCount(ADMIN_ADDRESS);
+        console.log("Running using the nonce value : " + nonce);
+
         const response = await this.lotteryContract
           .methods
           .startDraw(seed)
-          .send({ from: ADMIN_ADDRESS });
+          .send({ from: ADMIN_ADDRESS, nonce: nonce });
+
         this.logger.log("Running draw successful :" + response.transactionHash);
       }
     }

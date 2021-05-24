@@ -81,21 +81,21 @@
                                                 <div class="col">
                                                     <div class="error-reason">
                                                         <ng-container *ngIf="buyForm.controls.ticketCount.errors?.max">
-                                                            You can only buy {{ maxTicketsPerPurchase }} tickets at once
+                                                            You can only buy {{ maxTicketsPerPurchase }} tickets at once.
                                                         </ng-container>
                                                         <ng-container *ngIf="buyForm.controls.ticketCount.errors?.required">
-                                                            Please enter a ticket count
+                                                            Please enter a ticket count.
                                                         </ng-container>
                                                         <ng-container *ngIf="buyForm.controls.ticketCount.errors?.notNumber">
-                                                            Please enter a valid number
+                                                            Please enter a valid number.
                                                         </ng-container>
                                                         <ng-container
                                                                 *ngIf="!buyForm.controls.ticketCount.errors?.notNumber && buyForm.controls.ticketCount.errors?.notWholeNumber">
-                                                            Please enter a whole number
+                                                            Please enter a whole number.
                                                         </ng-container>
                                                         <ng-container
                                                                 *ngIf="!buyForm.controls.ticketCount.errors?.required && buyForm.controls.ticketCount.errors?.balanceExceeded">
-                                                            Your Balance of sUSD {{ formatAmount(userBalanceValue) }} has exceeded
+                                                            Your Balance of sUSD {{ formatAmount(userBalanceValue) }} has exceeded.
                                                         </ng-container>
                                                     </div>
                                                 </div>
