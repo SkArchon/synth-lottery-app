@@ -189,7 +189,7 @@ contract Lottery is LotteryTicket, VRFConsumerBase {
           winningBase = startTokenId;
           incrementer = 0;
         }
-      } while(_winningTokens[winningToken]);
+      } while(_winningTokens[winningToken] || winningToken > lastTokenId);
 
       return winningToken;
   }
