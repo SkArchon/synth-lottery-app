@@ -139,14 +139,18 @@ export class HomeComponent implements OnDestroy {
         if (accountAddress) {
           return true;
         }
-        alert('Please sign in using the sign in button at the top right hand corner first!');
+        this.snackBar.open('Please sign in using the "Sign In" button at the top right hand corner first', 'Close', {
+          panelClass: ['failure-snackbar']
+        });
         return false;
       }),
       filter(_ => {
         this.buyForm.markAllAsTouched();
 
         if (this.buyForm.invalid) {
-          alert('Please make sure to enter a valid value');
+          this.snackBar.open('Please make sure to enter a valid amount', 'Close', {
+            panelClass: ['failure-snackbar']
+          });
         }
 
         return !this.buyForm.invalid;

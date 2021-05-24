@@ -5,7 +5,7 @@
 // export const PROVIDER_URL = 'http://localhost:7545';
 
 // KOVAN
-export const CONTRACT_ADDRESS = '0x6DA9Be38290320eE5B4a16A3872a3abb70D8E8B5';
+export const CONTRACT_ADDRESS = '<<REPLACE_ADDRESS>>';
 export const USD_ADDRESS = '0x57Ab1ec28D129707052df4dF418D58a2D46d5f51';
 export const BACKEND_SERVICE_URL = 'http://localhost:3000';
 export const PROVIDER_URL = 'https://kovan.infura.io/v3/94678990504444e9a99275e787dcddb8';

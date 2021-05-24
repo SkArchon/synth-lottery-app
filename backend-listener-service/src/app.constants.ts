@@ -1,4 +1,4 @@
-export const CONTRACT_ADDRESS = '0x6DA9Be38290320eE5B4a16A3872a3abb70D8E8B5';
+export const CONTRACT_ADDRESS = '<<REPLACE_ADDRESS>>';
 export const INFURA_KEY = "94678990504444e9a99275e787dcddb8";
 export const NETWORK = 'kovan';
 // Test account PK only, dont use for actuals :)

@@ -112,40 +112,46 @@ Automatic converstions was looked at using the Uinswap router, however was not i
 The system could be truly self sustaining by taking a fee for LINK conversions.
 
 
-How to start projects
-1. Run `npm install` inside all three folders individually.
+# Project Setup
 
+### Method using helper scripts
+
+Run the following from the root directory, if you look at the root directory package.json it has a setup of helper scripts.
 ```
-cd user-interface
-npm install
-
-cd ../contracts
-npm install
-
-cd ../backend-listener-service
-npm install
+npm run install-all
 ```
 
-2. Go to `contracts` run `./deploy_kovan.sh`. and copy the contract address
-```
-#if not in dir
-cd contracts
-./deploy_kovan.sh
+Open up the file `2_migrate.js` and update the `sUsdAddress` if required. (or any similar ERC20 token).
 
-#The above script will copy over the processed contracts into the user-interface folder.
-# Currently the script doesnt copy the lottery.json over to the backend-listner-service. If you need to change the abi, copy it over to Lottery.ts 
-```
-3. search for `app.constants.ts` (2 files) and replace the lottery contract. You would have gotten a output from the deploy script as follows
+Then run
 
+```
+npm run deploy-contract-kovan
+```
+
+Copy the outputted contract address (should look like below)
 ```
 ================================================
 PASTE Lottery Contract Address In app.constants.ts (2 files): 0xF199FFb9Cbc5a35647d0641e51fcA45090ca52f0
 ================================================
-
-  OR USE
-
-Deploying 'Lottery'
 ```
 
-4. Run `npm run start` in backend and user-interface folders separately.
-5. Go to http://localhost:4200
+Then a link kovan faucent page will open up, make sure to fund the contract with link (for the draw).
+
+Next search for `<<REPLACE_ADDRESS>>`. Here repalce the contract address. (Alternatively if you used a different sUSD contract address, make sure to replace it in the `user-interface` `USD_ADDRESS` variable value).
+
+And finally run
+
+```
+# This runs both client and listener service in same terminal, if you wish to do it in separate terminals, run the individual commands separately
+start-services
+```
+
+Note: Please consider setting a local/different url for mongodb, or there can be multiple hosts pushing to the same repository
+Search for "MONGODB_URL" (in app.constants.ts)
+
+Go to http://localhost:4200, if everything was deployed correctly, you should get the page in the above screenshot (or similar).
+
+The backend service should output `Returning result ` if connection to the contract was successful (task.service.ts, line 70).
+
+
