@@ -105,12 +105,15 @@ The admin can change the active winning percentages right now(but this too can b
 
 The project has been setup with most of the keys and secrets committed. These are throwaway items that were committed to make it easy for reviewers.
 
-# Known Issues
-
+# Issues (Known and Potential)
+ 
 There was an issue where after certain async tasks ran (like loading winner details after a draw has run without refreshing the page) where if you try to submit a transaction an error would happen. This was because the provider was getting reset to the Infura provider. However this has been fixed, while unlikely due to lack of time to test, it maybe could occur through other patterns. In this case please try refreshing the page and doing the action again.
+
+Likewise, there could be missing permutations where a certain dataset that needed to be reloaded **asynchronously** after a certain action was not coded in.
 
 On the lottery draw page, the display limit is currently capped to 10. However the backend has been written in a fashion capable of pagination. The plan was to allow infinite scrolling to demonstrate how centralized apps could help with UX, but due to lack of time this was not possible.
 
+Draws can overlap, where multiple draws have elapsed. What I mean is, lets say a draw last 5 minutes, however draw #1 which was supposed to be processed at 5 PM was not processed yet. When the seheduler is started back up at 6 PM the next draw time will be 5:05 PM which is still in the past. This is less unlikely when the draw is processed once per week, but still possible. Logic needs to be added to set the time to the most recent draw in the future.
 # Further Improvements
 
 One major improvement point is to make the contract self sustainable, this can be done by using Uniswaps Router (https://uniswap.org/docs/v2/smart-contracts/router02/) or some similar contract. To exchange sUSD for Link. This way the contract can be self sustained.
