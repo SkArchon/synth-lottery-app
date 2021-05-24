@@ -20,7 +20,7 @@
                 <div>
                     Target Address
                 </div>
-                <input type="text" formControlName="targetAddress">
+                <input type="text" class="target-address" formControlName="targetAddress">
                 <div *ngIf="(transferForm.controls.targetAddress.touched)" class="error-reason">
                     <ng-container *ngIf="transferForm.controls.targetAddress.errors?.required || transferForm.controls.targetAddress.errors?.addressNotValid">
                         Please enter a valid address

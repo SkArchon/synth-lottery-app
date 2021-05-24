@@ -24,6 +24,10 @@ p {
     text-align: center;
 }
 
+.input-text {
+    width: 50%;
+}
+
 .button-approve {
     margin-top: 10px;
 }
@@ -32,8 +36,14 @@ p {
     text-align: center;
 }
 
+.error-reason {
+    color: $error-color;
+    font-size: 14px;
+}
+
 .pending-message {
     margin-bottom: 10px;
     text-align: center;
 }
+
 

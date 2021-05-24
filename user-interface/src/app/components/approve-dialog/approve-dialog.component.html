@@ -24,7 +24,7 @@
                     <label for="approve-amount">Approve Amount</label>
                 </div>
                 <div>
-                    <input type="text" formControlName="approveAmount" id="approve-amount">
+                    <input type="text" class="input-text" formControlName="approveAmount" id="approve-amount">
                 </div>
                 <div *ngIf="(approveForm.controls.approveAmount.touched)" class="error-reason">
                     <ng-container *ngIf="approveForm.controls.approveAmount.errors?.required">
@@ -32,7 +32,7 @@
                     </ng-container>
                     <ng-container
                         *ngIf="!approveForm.controls.approveAmount.errors?.required && approveForm.controls.approveAmount.errors?.minPriceNotMet">
-                        Please enter at least {{ approvalMinPrice }}
+                        Please enter at least sUSD {{ approvalMinPrice }} (which is the purchase price).
                     </ng-container>
                 </div>
                 <button type="submit" class="Button Button--primary button-approve">Approve</button>
