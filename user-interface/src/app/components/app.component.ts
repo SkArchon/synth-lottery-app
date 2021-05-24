@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ContractService } from '../service/contract.service';
 import { Store } from '@ngrx/store';
 import { getAccountAddress, getAccountAddressShortened } from '../store/selectors/users.selectors';
 import { interval, Observable, of, Subject } from 'rxjs';
 import { logoutUser } from '../store/reducers/user.reducer';
-import { filter, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, filter, map, switchMap, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
 import { getIsDrawDatePassed, getNextDrawTimestamp } from 'app/store/selectors/lottery.selectors';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DateTime } from 'luxon';
@@ -14,16 +14,20 @@ import { DateTime } from 'luxon';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'application';
+export class AppComponent implements OnDestroy {
+
+  public startDraw$ = new Subject<void>();
 
   public accountAddress$: Observable<string>;
+
   public remainingTime$ = new Subject<any>();
+  public unsubscriber$ = new Subject<any>();
 
   constructor(private contractService: ContractService,
               private snackBar: MatSnackBar,
               private store: Store) {
     this.accountAddress$ = this.store.select(getAccountAddressShortened);
+    this.setupStartDraw();
   }
 
   public signIn(): any {
@@ -34,8 +38,9 @@ export class AppComponent {
     this.store.dispatch(logoutUser());
   }
 
-  public startDraw(): any {
-    of({}).pipe(
+  public setupStartDraw(): any {
+    this.startDraw$.pipe(
+      takeUntil(this.unsubscriber$),
       withLatestFrom(this.store.select(getNextDrawTimestamp)),
       map(([_, timestamp]) => {
         if (!timestamp) {
@@ -45,7 +50,7 @@ export class AppComponent {
         const dateTimestamp = DateTime.fromSeconds(timestamp);
         const difference = dateTimestamp.diffNow('minutes').toObject().minutes;
 
-        if (difference < -18) {
+        if (difference < -30) {
           const confirmResult = confirm('A backend service was expected to run this draw, if you still want to proceed. Click ok.');
           return confirmResult;
         } else if (difference <= 0) {
@@ -70,10 +75,22 @@ export class AppComponent {
           .methods
           .startDraw(1234)
           .send({ from: accountAddress });
+      }),
+      tap(_result => {
+        this.snackBar.open('Draw process initiation transaction sent successfully.', 'Close');
+      }),
+      catchError(_error => {
+        this.snackBar.open('An error occurred when trying to send the draw initiation transaction.', 'Close', {
+          panelClass: ['failure-snackbar']
+        });
+        return of(false);
       })
-    ).subscribe(result => {
-      console.log(result);
-    });
+    ).subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscriber$.next();
+    this.unsubscriber$.complete();
   }
 
 

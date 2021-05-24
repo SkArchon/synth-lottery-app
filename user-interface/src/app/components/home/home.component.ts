@@ -110,6 +110,15 @@ export class HomeComponent implements OnDestroy {
     this.getDurationUpdater().subscribe(this.remainingTime$);
     this.getIsDrawDateValuePassedUpdater().subscribe(this.isDrawDatePassed$);
 
+    this.getIsDrawDateValuePassedUpdater(20000).pipe(
+      filter(result => result),
+      tap(_ => {
+        this.store.dispatch(lotteryLoadData());
+        this.store.dispatch(loadUserTickets());
+        this.store.dispatch(loadLotteryDraws());
+      })
+    ).subscribe();
+
     this.buyForm = formBuilder.group({
       ticketCount: new FormControl(1, [
         Validators.required,
@@ -283,8 +292,8 @@ export class HomeComponent implements OnDestroy {
     );
   }
 
-  private getIsDrawDateValuePassedUpdater() {
-    return interval(1000).pipe(
+  private getIsDrawDateValuePassedUpdater(intervalValue: number = 1000) {
+    return interval(intervalValue).pipe(
       takeUntil(this.unsubscriber$),
       withLatestFrom(this.store.select(getNextDrawTimestamp)),
       map(([_, timestamp]) => getIsDrawDateValuePassed(timestamp))
