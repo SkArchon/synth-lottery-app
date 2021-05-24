@@ -43,7 +43,7 @@ export class AppComponent {
           });
           return false;
         }
-        const confirmResult = confirm('A backend service is expected to run this draw, if you still want to proceed. Click ok');
+        const confirmResult = confirm('A backend service is expected to run this draw, if you still want to proceed. Click ok.');
         return confirmResult;
       }),
       filter(result => result),
