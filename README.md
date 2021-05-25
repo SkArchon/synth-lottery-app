@@ -147,7 +147,7 @@ Then run (skip to next for windows / environments that cant run bash scripts)
 npm run deploy-contract-kovan
 ```
 
-** windows only ** If you on Windows you may not be able to run the above, try doing the following.
+** windows only ** If you are on Windows you may not be able to run the above, try doing the following.
 *Also take a look at deploy_kovan.sh*
 1. Go into the folder of "contracts"
 2. Clean the build folder (`contracts/build`)
