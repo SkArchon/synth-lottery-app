@@ -23,9 +23,9 @@ Click the following (https://youtu.be/5K5kpaddMsw) to view the recording.
 
 ### Getting Into the Application
 
-Before a user logs into the application with his wallet, we use a separate infura provider for non logged in users. When the user clicks the Signin button, the user will be provided multiple options of logging in.
+Before a user logs into the application with his wallet, we use a separate infura provider for non logged in users. When the user clicks the Signin button, the user can be provided multiple options of logging in (In the demo we only have set one though).
 
-This is as we use the web3modal library, currently we have added two for Demo purposes. But we only really tested with metamask.
+This is as we use the web3modal library, currently we have not configured any multiple options for Demo purposes. But the option is there.
 
 
 After the user logs in, we use the account Id to get additional information. Namely the balance and the contract approval amount. All of this data is stored in a redux style store (ngrx in angular). Which allows for high synchronity.
